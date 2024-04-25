@@ -28,13 +28,14 @@ public class PostListener {
     //10 max by default
     public void consumeNewFileRequest( final String input) {
         try {
-            log.info("LIVE MESSAGE: " + input);
+            log.info("consumed: " + input);
             var queuePost = objectMapper.readValue(input, QueuePostCreate.class);
             var toSave = new Post(queuePost.getUserId(),queuePost.getContent());
             postRepository.save(toSave);
         }
         catch (Exception e){
             log.error("error: " + e.getMessage());
+            throw new IllegalArgumentException();
         }
     }
 }

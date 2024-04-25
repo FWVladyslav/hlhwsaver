@@ -2,6 +2,7 @@ package com.example.hlhwsaver.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -13,7 +14,7 @@ import java.util.UUID;
 @Entity(name = "posts")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "postId")
 public class Post {
     public Post(Integer userId, String content) {
         this.userId = userId;
@@ -21,8 +22,8 @@ public class Post {
     }
 
     @Id
-    @GeneratedValue
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer postId;
     private Integer userId;
     private String content;
 }
